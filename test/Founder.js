@@ -59,6 +59,7 @@ describe("Token contract", function() {
         const balance = await user.getBalance();
         expect(Number(ethers.utils.formatEther(await user.getBalance()))).lt(userBalance);
         expect(Number(ethers.utils.formatEther(await FounderContract.balance()))).to.eq(1);
+        expect(await FounderContract.total()).to.eq(1);
         const isFounder = await FounderContract.isFounder(user.address);
         expect(isFounder).to.equal(true)
         await UserFounderContract.withdraw();
@@ -66,6 +67,7 @@ describe("Token contract", function() {
         expect(isFounderAfterWithdraw).to.equal(false);
         expect(Number(ethers.utils.formatEther(await user.getBalance()))).gt(userBalance);
         expect(Number(ethers.utils.formatEther(await FounderContract.balance()))).to.eq(0);
+        expect(await FounderContract.total()).to.eq(0);
     })
 
     it("It should set limit and return the value", async () => {
