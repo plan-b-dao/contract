@@ -37,7 +37,7 @@ contract Founder {
 
     function addToFounder(address _addr) external payable {
         require(founders[_addr] == false, 'Already a founder');
-        require(msg.value == 1000000000000000000, 'Not enough ETH');
+        require(msg.value == rate, 'Not enough ETH');
         require(total < limit, 'Limit reached');
         founders[_addr] = true;
         total += 1;
